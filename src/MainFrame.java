@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 
 import javax.swing.JButton;
@@ -76,6 +77,16 @@ public class MainFrame {
 				if(inputValue!=null){
 					new delete(inputValue).start();
 				}
+			}
+		});
+		JF.addWindowListener(new WindowAdapter(){
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				up.Stop();
+				dowm.Stop();
+				delete.Stop();
+				rename.Stop();
+				System.exit(0);
 			}
 		});
 		JF.add(Up);

@@ -1,5 +1,8 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -10,9 +13,14 @@ import java.net.UnknownHostException;
 import javax.swing.JOptionPane;
 
 public class up extends Thread{
-	String file = null;
-	Socket s;
-	boolean isConnect = false;
+	private String file = null;
+	private Socket s;
+	private static boolean stop = false;
+	private boolean isConnect = false;
+	
+	public static void Stop(){
+		stop = true;
+	}
 	public up(String file){
 		this.file = file;
 	}
@@ -45,8 +53,44 @@ public class up extends Thread{
 			waitGet();
 			out(file);
 			BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream(),"UTF-8"));
-			br.readLine();
-			
+			String Return = br.readLine();
+			if(!Return.equals("false")){
+				JOptionPane.showMessageDialog(null, "云中有相同名称的文件存在，请重命名后尝试"); 
+			}else{
+				File f = new File(file);
+				Long l = f.length();
+				DataOutputStream dos = new DataOutputStream(s.getOutputStream());
+				FileInputStream fis = new FileInputStream(f);
+				dos.writeLong(l);
+				dos.flush();
+				if(!waitGet())
+				{
+					JOptionPane.showMessageDialog(null, "服务器已满上传失败！");
+				}else{
+					//开始上传
+					int length = 0;
+					long sumL = 0;
+					byte[] sendBytes = new byte[1024]; 
+					while ((length = fis.read(sendBytes, 0, sendBytes.length)) > 0 && !stop) {  
+		                sumL += length;    
+		               // System.out.println("已传输："+((sumL/l)*100)+"%");  
+		                dos.write(sendBytes, 0, length);  
+		                dos.flush(); 
+		                if(stop){
+		                	JOptionPane.showMessageDialog(null, "传输终止"); 
+		                	if(dos!=null){
+		                		dos.close();
+		                	}
+		                	if(s!=null){
+		                		s.close();
+		                	}
+			            	break;
+			            }
+	
+		            }
+				}
+				
+			}
 			
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
