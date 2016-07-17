@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 //ok new begin
 public class MainFrame {
 	public void CreateWindow(){
-		JFrame JF = new JFrame("YCloud");
+		final JFrame JF = new JFrame("YCloud");
 		JF.setSize(300, 200);
 		JF.setVisible(true);
 		JF.setLayout(new FlowLayout());
@@ -34,7 +34,7 @@ public class MainFrame {
 		JButton Rename = new JButton("重命名");
 		JButton Delete = new JButton("删除");
 		Up.addActionListener(new ActionListener(){
-			@Override
+			
 	    	public void actionPerformed(ActionEvent e){
 				 File f = new File(".");
 				 JFileChooser jfc=new JFileChooser(f.getAbsolutePath().substring(0,f.getAbsolutePath().length()-1));  
@@ -57,7 +57,6 @@ public class MainFrame {
 			}
 		});
 		Rename.addActionListener(new ActionListener(){
-			@Override
 			public void actionPerformed(ActionEvent e){
 				String inputValue = JOptionPane.showInputDialog(JF,"请输入文件名与修改名（例：\"FILE FILE1\")","改名",JOptionPane.PLAIN_MESSAGE); 
 				if(inputValue!=null){
@@ -71,7 +70,7 @@ public class MainFrame {
 			}
 		});
 		Delete.addActionListener(new ActionListener(){
-			@Override
+			
 			public void actionPerformed(ActionEvent e){
 				String inputValue = JOptionPane.showInputDialog(JF,"请输入文件名","删除",JOptionPane.PLAIN_MESSAGE); 
 				if(inputValue!=null){

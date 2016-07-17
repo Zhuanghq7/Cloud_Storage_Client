@@ -7,6 +7,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import javax.swing.JOptionPane;
+
 public class down extends Thread{
 	private String file = null;
 	private Socket s;
@@ -42,6 +44,14 @@ public class down extends Thread{
 			isConnect = true;
 			out("down");
 			waitGet();
+			out(file);
+			BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream(),"UTF-8"));
+			String Return = br.readLine();
+			if(!Return.equals("false")){
+				JOptionPane.showMessageDialog(null, "找不到该文件"); 
+			}else{
+			
+			}
 			
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
