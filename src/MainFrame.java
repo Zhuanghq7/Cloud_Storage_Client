@@ -52,7 +52,7 @@ public class MainFrame {
 		Down.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e){
-				String inputValue = JOptionPane.showInputDialog(JF,"请输入文件名","下载",JOptionPane.PLAIN_MESSAGE); 
+				String inputValue = JOptionPane.showInputDialog(JF,"请输入文件ID","下载",JOptionPane.PLAIN_MESSAGE); 
 				if(inputValue!=null){
 					new down(inputValue).start();
 				}
@@ -60,7 +60,7 @@ public class MainFrame {
 		});
 		Rename.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				String inputValue = JOptionPane.showInputDialog(JF,"请输入文件名与修改名（例：\"FILE FILE1\")","改名",JOptionPane.PLAIN_MESSAGE); 
+				String inputValue = JOptionPane.showInputDialog(JF,"请输入文件ID与修改名（例：\"FILE FILE1\")","改名",JOptionPane.PLAIN_MESSAGE); 
 				if(inputValue!=null){
 					for(int i = 0;i<inputValue.length();i++){
 						if(inputValue.charAt(i)==' '){
@@ -74,7 +74,7 @@ public class MainFrame {
 		Delete.addActionListener(new ActionListener(){
 			
 			public void actionPerformed(ActionEvent e){
-				String inputValue = JOptionPane.showInputDialog(JF,"请输入文件名","删除",JOptionPane.PLAIN_MESSAGE); 
+				String inputValue = JOptionPane.showInputDialog(JF,"请输入文件ID","删除",JOptionPane.PLAIN_MESSAGE); 
 				if(inputValue!=null){
 					new delete(inputValue).start();
 				}

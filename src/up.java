@@ -52,10 +52,8 @@ public class up extends Thread{
 			out("up");
 			waitGet();
 			out(file);
-			BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream(),"UTF-8"));
-			String Return = br.readLine();
-			if(!Return.equals("false")){
-				JOptionPane.showMessageDialog(null, "云中有相同名称的文件存在，请重命名后尝试"); 
+			if(!waitGet()){
+				//JOptionPane.showMessageDialog(null, "云中有相同名称的文件存在，请重命名后尝试"); 
 			}else{
 				File f = new File(file);
 				Long l = f.length();
@@ -88,6 +86,15 @@ public class up extends Thread{
 			            }
 	
 		            }
+					String uuid = in();
+					JOptionPane.showMessageDialog(null, "这是您的提取码"+uuid+"请牢记");
+					out("get");
+					if(dos!=null){
+						dos.close();
+					}
+					if(s!=null){
+						s.close();
+					}
 				}
 				
 			}

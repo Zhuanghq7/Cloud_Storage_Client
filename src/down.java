@@ -56,7 +56,12 @@ public class down extends Thread{
 			}else{
 				DataInputStream dis = new DataInputStream(s.getInputStream());
                 Long flength = dis.readLong();//从服务器获取文件大小
-                File f = new File(file);
+                out("get");
+                String fName = in();
+                out("get");
+                
+                
+                File f = new File(fName);
                 FileOutputStream fos = new FileOutputStream(f);      
                 byte[] inputByte = new byte[1024];     
                 System.out.println("开始接收数据...");  
@@ -81,7 +86,8 @@ public class down extends Thread{
 	                	}
 	                	break;
     	            }
-                }  
+                }
+                JOptionPane.showMessageDialog(null, "下载成功");
 			}
 			
 		} catch (UnknownHostException e) {
