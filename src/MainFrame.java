@@ -1,5 +1,9 @@
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,22 +17,20 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+
 
 //ok new begin
 public class MainFrame {
 	public void CreateWindow(){
 		final JFrame JF = new JFrame("YCloud");
 		JF.setSize(300, 200);
-		JF.setVisible(true);
-		JF.setLayout(new FlowLayout());
+		
+		JF.setLayout(new BorderLayout());
 		Dimension screenSize =Toolkit.getDefaultToolkit().getScreenSize();
 		JF.setLocation(screenSize.width/2-150,screenSize.height/2-100);
 		JF.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		JF.addWindowListener(new WindowAdapter(){
-			public void windowClosing(WindowEvent e) {
-				System.exit(0);
-			}
-		});
 		JButton Up = new JButton("上传");
 		JButton Down = new JButton("下载");
 		JButton Rename = new JButton("重命名");
@@ -82,16 +84,17 @@ public class MainFrame {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
 				up.Stop();
-				dowm.Stop();
-				delete.Stop();
-				rename.Stop();
+				down.Stop();
 				System.exit(0);
 			}
 		});
-		JF.add(Up);
-		JF.add(Down);
-		JF.add(Rename);
-		JF.add(Delete);
+		JPanel jp = new JPanel();
+		jp.add(Up);
+		jp.add(Down);
+		jp.add(Rename);
+		jp.add(Delete); 
+        JF.add(jp,BorderLayout.CENTER);
+		JF.setVisible(true);
 	}
 	public static void main(String[] args){
 		MainFrame MF = new MainFrame();

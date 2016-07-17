@@ -1,5 +1,8 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -37,6 +40,9 @@ public class down extends Thread{
 			return true;
 		return false;
 	}
+	public static void Stop(){
+		stop = true;
+	}
 	@Override 
 	public void run(){
 		try {
@@ -45,19 +51,48 @@ public class down extends Thread{
 			out("down");
 			waitGet();
 			out(file);
-			BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream(),"UTF-8"));
-			String Return = br.readLine();
-			if(!Return.equals("false")){
+			if(!waitGet()){
 				JOptionPane.showMessageDialog(null, "找不到该文件"); 
 			}else{
-			
+				DataInputStream dis = new DataInputStream(s.getInputStream());
+                Long flength = dis.readLong();//从服务器获取文件大小
+                File f = new File(file);
+                FileOutputStream fos = new FileOutputStream(f);      
+                byte[] inputByte = new byte[1024];     
+                System.out.println("开始接收数据...");  
+                double sumL = 0;
+                int length;
+                while ((length = dis.read(inputByte, 0, inputByte.length)) > 0) {  
+                    fos.write(inputByte, 0, length);  
+                    fos.flush();  
+                    sumL+=length;
+                    System.out.println("已传输："+sumL/(flength/100)+"%");
+                    if(sumL>=flength){
+                    	//System.out.println("1");
+                    	break;
+                    }  
+                    if(stop){   
+                    	JOptionPane.showMessageDialog(null, "传输终止"); 
+	                	if(dis!=null){
+	                		dis.close();
+	                	}
+	                	if(s!=null){
+	                		s.close();
+	                	}
+	                	break;
+    	            }
+                }  
 			}
 			
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
+			stop = true;
+			JOptionPane.showMessageDialog(null, "传输终止"); 
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			stop = true;
+			JOptionPane.showMessageDialog(null, "传输终止"); 
 			e.printStackTrace();
 		}
 	}
