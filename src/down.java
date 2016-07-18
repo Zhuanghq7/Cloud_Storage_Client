@@ -62,6 +62,9 @@ public class down extends Thread{
                 
                 
                 File f = new File(fName);
+                if(!f.exists()){
+                	f.createNewFile();
+                }
                 FileOutputStream fos = new FileOutputStream(f);      
                 byte[] inputByte = new byte[1024];     
                 System.out.println("开始接收数据...");  

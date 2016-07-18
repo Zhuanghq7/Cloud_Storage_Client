@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 
 //ok new begin
 public class MainFrame {
+	public static JFrame MF;
 	public void CreateWindow(){
 		final JFrame JF = new JFrame("YCloud");
 		JF.setSize(300, 200);
@@ -35,6 +36,7 @@ public class MainFrame {
 		JButton Down = new JButton("ÏÂÔØ");
 		JButton Rename = new JButton("ÖØÃüÃû");
 		JButton Delete = new JButton("É¾³ı");
+		MF = JF;
 		Up.addActionListener(new ActionListener(){
 			
 	    	public void actionPerformed(ActionEvent e){

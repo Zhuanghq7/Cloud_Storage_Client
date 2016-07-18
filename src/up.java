@@ -51,11 +51,12 @@ public class up extends Thread{
 			isConnect = true;
 			out("up");
 			waitGet();
-			out(file);
+			File f = new File(file);
+			out(f.getName());
 			if(!waitGet()){
 				//JOptionPane.showMessageDialog(null, "云中有相同名称的文件存在，请重命名后尝试"); 
 			}else{
-				File f = new File(file);
+				
 				Long l = f.length();
 				DataOutputStream dos = new DataOutputStream(s.getOutputStream());
 				FileInputStream fis = new FileInputStream(f);
@@ -87,7 +88,8 @@ public class up extends Thread{
 	
 		            }
 					String uuid = in();
-					JOptionPane.showMessageDialog(null, "这是您的提取码"+uuid+"请牢记");
+					//JOptionPane.showMessageDialog(null, "这是您的提取码"+uuid+"请牢记");
+					JOptionPane.showInputDialog(MainFrame.MF,"这是您的提取码请牢记","ID",JOptionPane.PLAIN_MESSAGE,null,null,uuid); 
 					out("get");
 					if(dos!=null){
 						dos.close();
