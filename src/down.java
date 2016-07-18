@@ -97,12 +97,12 @@ public class down extends Thread{
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			stop = true;
-			JOptionPane.showMessageDialog(null, "¥´ ‰÷’÷π"); 
+			JOptionPane.showMessageDialog(null, "œ¬‘ÿ ß∞‹"); 
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			stop = true;
-			JOptionPane.showMessageDialog(null, "¥´ ‰÷’÷π"); 
+			JOptionPane.showMessageDialog(null, "œ¬‘ÿ ß∞‹"); 
 			e.printStackTrace();
 		}
 	}
