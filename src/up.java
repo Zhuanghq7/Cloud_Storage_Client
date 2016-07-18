@@ -44,6 +44,7 @@ public class up extends Thread{
 			return true;
 		return false;
 	}
+	//以上跟NODE一样= =
 	@Override
 	public void run(){
 		try {
@@ -53,6 +54,7 @@ public class up extends Thread{
 			waitGet();
 			File f = new File(file);
 			out(f.getName());
+			//与主服务器交流
 			if(!waitGet()){
 				//JOptionPane.showMessageDialog(null, "云中有相同名称的文件存在，请重命名后尝试"); 
 			}else{
@@ -62,7 +64,7 @@ public class up extends Thread{
 				FileInputStream fis = new FileInputStream(f);
 				dos.writeLong(l);
 				dos.flush();
-				if(!waitGet())
+				if(!waitGet())//如果服务器返回false说明不能上传
 				{
 					JOptionPane.showMessageDialog(null, "服务器已满上传失败！");
 				}else{
@@ -90,7 +92,7 @@ public class up extends Thread{
 					String uuid = in();
 					//JOptionPane.showMessageDialog(null, "这是您的提取码"+uuid+"请牢记");
 					JOptionPane.showInputDialog(MainFrame.MF,"这是您的提取码请牢记","ID",JOptionPane.PLAIN_MESSAGE,null,null,uuid); 
-					out("get");
+					out("get");//一点微小的工作
 					if(dos!=null){
 						dos.close();
 					}
