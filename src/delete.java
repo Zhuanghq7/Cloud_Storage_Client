@@ -47,6 +47,7 @@ public class delete extends Thread {
 			if(!waitGet()){
 				JOptionPane.showMessageDialog(null, "该文件不存在或已删除"); 
 			}else{
+				JOptionPane.showMessageDialog(null, "成功删除"); 
 				if(s!=null){
 					s.close();
 				}

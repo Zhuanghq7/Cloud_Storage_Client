@@ -91,6 +91,7 @@ public class down extends Thread{
     	            }
                 }
                 JOptionPane.showMessageDialog(null, "œ¬‘ÿ≥…π¶");
+                fos.close();
 			}
 			
 		} catch (UnknownHostException e) {

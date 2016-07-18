@@ -51,6 +51,7 @@ public class rename extends Thread {
 			}else{
 				out(newName);
 				waitGet();
+				JOptionPane.showMessageDialog(null, "改名成功"); 
 				if(s!=null){
 					s.close();
 				}
