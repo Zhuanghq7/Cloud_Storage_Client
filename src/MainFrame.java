@@ -26,9 +26,9 @@ public class MainFrame {
 	public static JFrame MF;
 	public void CreateWindow(){
 		final JFrame JF = new JFrame("YCloud");
-		JF.setSize(300, 200);
+		JF.setSize(315, 200);
 		
-		JF.setLayout(new BorderLayout());
+		JF.setLayout(null);
 		Dimension screenSize =Toolkit.getDefaultToolkit().getScreenSize();
 		JF.setLocation(screenSize.width/2-150,screenSize.height/2-100);
 		JF.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -91,12 +91,27 @@ public class MainFrame {
 			}
 		});
 		JPanel jp = new JPanel();
+		panel p = new panel();
+		p.setLocation(0, 0);
+		jp.setLocation(0, 100);
+		p.setSize(300, 100);
+		jp.setSize(300, 100);
 		jp.add(Up);
 		jp.add(Down);
 		jp.add(Rename);
 		jp.add(Delete); 
-        JF.add(jp,BorderLayout.CENTER);
+		JF.add(p);
+		JF.add(jp);
 		JF.setVisible(true);
+		long begin = System.nanoTime();
+		long end = 0;
+		while(true){
+			end = System.nanoTime();
+			if((end - begin)/1000000L>= 17){
+				begin = end;
+				p.repaint();
+			}
+		}
 	}
 	public static void main(String[] args){
 		MainFrame MF = new MainFrame();
